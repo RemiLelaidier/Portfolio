@@ -1,0 +1,10 @@
+{
+  "en": {
+    "welcome" : "Welcome",
+    "subWelcome" : "RL-DevLab"
+  },
+  "fr": {
+    "welcome" : "Bienvenue",
+    "subWelcome" : "RL-DevLab"
+  }
+}
