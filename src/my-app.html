@@ -23,9 +23,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-localize-behavior/app-localize-behavior.html">
 <link rel="import" href="my-icons.html">
 
-<link rel="lazy-import" href="my-view1.html">
-<link rel="lazy-import" href="my-view2.html">
-<link rel="lazy-import" href="my-view3.html">
+<link rel="lazy-import" href="my-home.html">
+<link rel="lazy-import" href="my-life.html">
+<link rel="lazy-import" href="my-works.html">
+<link rel="lazy-import" href="my-contact.html">
 <link rel="lazy-import" href="my-view404.html">
 
 <dom-module id="my-app">
@@ -86,9 +87,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="[[rootPath]]view1">View One</a>
-          <a name="view2" href="[[rootPath]]view2">View Two</a>
-          <a name="view3" href="[[rootPath]]view3">View Three</a>
+          <a name="home" href="[[rootPath]]home">{{localize("menu_home")}}</a>
+          <a name="life" href="[[rootPath]]life">{{localize("menu_life")}}</a>
+          <a name="works" href="[[rootPath]]works">{{localize("menu_works")}}</a>
+          <a name="contact" href="[[rootPath]]contact">{{localize("menu_contact")}}</a>
         </iron-selector>
       </app-drawer>
 
@@ -107,9 +109,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             attr-for-selected="name"
             fallback-selection="view404"
             role="main">
-          <my-view1 name="view1"></my-view1>
-          <my-view2 name="view2"></my-view2>
-          <my-view3 name="view3"></my-view3>
+          <my-home name="home"></my-home>
+          <my-life name="life"></my-life>
+          <my-works name="works"></my-works>
+          <my-contact name="contact"></my-contact>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
       </app-header-layout>
@@ -132,7 +135,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           // This shouldn't be neccessary, but the Analyzer isn't picking up
           // Polymer.Element#rootPath
           rootPath: String,
+          language: {
+            value: 'en'
+          }
         };
+      }
+
+      /**
+       * Ready lifecycle
+       */
+      ready(){
+        super.ready();
+        // Get navigator language
+        const lng = navigator.language || navigator.userLanguage;
+        if(lng === "fr"){
+          this.language = lng;
+        }
+        else {
+          this.language = "en";
+        }
+        // Load locales
+        this.loadResources(this.resolveUrl('../locales.json'));
       }
 
       static get observers() {
@@ -144,7 +167,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _routePageChanged(page) {
         // If no page was found in the route data, page will be an empty string.
         // Default to 'view1' in that case.
-        this.page = page || 'view1';
+        this.page = page || 'home';
 
         // Close a non-persistent drawer when the page & route are changed.
         if (!this.$.drawer.persistent) {

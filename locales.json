@@ -1,10 +1,18 @@
 {
   "en": {
     "welcome" : "Welcome",
-    "subWelcome" : "RL-DevLab"
+    "subWelcome" : "RL-DevLab",
+    "menu_home" : "Home",
+    "menu_life" : "Who I Am",
+    "menu_works" : "What I Do",
+    "menu_contact" : "Where I Am"
   },
   "fr": {
     "welcome" : "Bienvenue",
-    "subWelcome" : "RL-DevLab"
+    "subWelcome" : "RL-DevLab",
+    "menu_home" : "Accueil",
+    "menu_life" : "Qui Suis-Je",
+    "menu_works" : "Que Fais-Je",
+    "menu_contact" : "Où Suis-Je"
   }
 }
